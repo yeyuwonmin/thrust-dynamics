@@ -207,9 +207,9 @@ html[lang="en"] .hero-sub{font-size:clamp(14px,1.25vw,16.5px);line-height:1.55;m
 .engine h3{font-family:var(--fh);font-size:clamp(20px,2.4vw,28px);font-weight:700;color:var(--ink);letter-spacing:-.01em;margin-bottom:var(--s2)}
 .engine p{font-size:14.5px;line-height:1.7;color:var(--ink-soft);margin-bottom:var(--s3)}
 .chips{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-.chip{display:flex;flex-direction:column;gap:2px;padding:11px 14px;background:var(--paper-2);border:1px solid var(--line);border-radius:var(--rad-md)}
-.chip .cv{font-family:var(--fh);font-size:15px;font-weight:700;color:var(--ink)}
-.chip .cl{font-size:11px;color:var(--muted)}
+.chip{display:flex;flex-direction:column;gap:4px;padding:11px 14px;background:var(--paper-2);border:1px solid var(--line);border-radius:var(--rad-md)}
+.chip .chip-l{font-size:11px;font-weight:500;line-height:1.3;color:var(--muted)}
+.chip .cv{font-family:var(--fh);font-size:15px;font-weight:700;line-height:1.2;color:var(--ink)}
 
 /* cutaway / how it works */
 .howfig{position:relative;margin-top:var(--s5);border-radius:var(--rad-lg);overflow:hidden;border:1px solid var(--line);box-shadow:var(--sh-md);background:#0e2240;line-height:0}
@@ -504,10 +504,10 @@ html[lang="ko"] .ftr-links a{font-family:var(--fk)}
         <p class="ko-text">정밀 부품을 통합·조립하여 완성한 소형 가스터빈 엔진입니다. 고속 무인기에 요구되는 추력과 속도를 목표로 설계됩니다.</p>
         <p class="en-text hidden">A compact gas turbine engine assembled from precision components — designed for the thrust and speed that high-speed UAVs demand.</p>
         <div class="chips">
-          <div class="chip"><span class="cv">18–40 kgf</span><span class="cl ko-text">추력</span><span class="cl en-text hidden">Thrust</span></div>
-          <div class="chip"><span class="cv">400–700<sup>+</sup> km/h</span><span class="cl ko-text">속도 범위</span><span class="cl en-text hidden">Speed range</span></div>
-          <div class="chip"><span class="cv">10–25 kg</span><span class="cl ko-text">엔진 중량</span><span class="cl en-text hidden">Engine weight</span></div>
-          <div class="chip"><span class="cv ko-text">제트 연료</span><span class="cv en-text hidden">Jet Fuel</span><span class="cl ko-text">연료 (JP-5 / JP-8)</span><span class="cl en-text hidden">Fuel (JP-5 / JP-8)</span></div>
+          <div class="chip"><span class="chip-l ko-text">추력</span><span class="chip-l en-text hidden">Thrust</span><span class="cv">18–40 kgf</span></div>
+          <div class="chip"><span class="chip-l ko-text">속도 범위</span><span class="chip-l en-text hidden">Speed range</span><span class="cv">400–700<sup>+</sup> km/h</span></div>
+          <div class="chip"><span class="chip-l ko-text">엔진 중량</span><span class="chip-l en-text hidden">Engine weight</span><span class="cv">10–25 kg</span></div>
+          <div class="chip"><span class="chip-l ko-text">연료 (JP-5 / JP-8)</span><span class="chip-l en-text hidden">Fuel (JP-5 / JP-8)</span><span class="cv ko-text">제트 연료</span><span class="cv en-text hidden">Jet Fuel</span></div>
         </div>
       </div>
     </div>
