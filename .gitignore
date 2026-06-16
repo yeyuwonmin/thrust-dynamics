@@ -1,0 +1,19 @@
+# --- Unused raw video sources (DaVinci master clips; NOT served by the live site) ---
+# These are ~200MB of source footage. The site only serves hero-master*.mp4 and
+# turbine-cinematic-loop.mp4. Keep them out of the repo / deploy.
+assets/video/hero/
+assets/video/sequence/
+assets/video/hero-loop.mp4
+
+# --- Local dev / tooling ---
+.claude/
+node_modules/
+*.log
+_tools/
+
+# --- OS / editor cruft ---
+Thumbs.db
+desktop.ini
+.DS_Store
+*.tmp
+tmp-*

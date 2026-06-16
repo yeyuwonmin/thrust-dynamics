@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title id="page-title">Thrust Dynamics | 고속 UAV용 마이크로 가스터빈 추진 시스템</title>
+<meta name="description" id="page-desc" content="Thrust Dynamics는 고속 무인항공 플랫폼을 위한 제조 중심 마이크로터빈 엔진을 개발하는 한국 기반 항공우주 하드웨어 기업입니다." />
+<meta name="theme-color" content="#0a1220" />
+<meta property="og:type" content="website" />
+<meta property="og:title" id="og-title" content="Thrust Dynamics | Micro Gas Turbine Propulsion for High-Speed UAVs" />
+<meta property="og:description" id="og-desc" content="Compact turbine propulsion for high-speed unmanned flight." />
+<link rel="icon" href="favicon.ico" sizes="any" />
+<meta name="robots" content="index, follow" />
+<meta name="author" content="Thrust Dynamics" />
+<meta name="format-detection" content="telephone=no" />
+<!-- At launch, set absolute URLs for canonical / og:url / og:image to your live domain -->
+<meta property="og:image" content="assets/clarity-engine.jpg" />
+<meta property="og:locale" content="ko_KR" />
+<meta property="og:locale:alternate" content="en_US" />
+<meta name="twitter:title" content="Thrust Dynamics | Micro Gas Turbine Propulsion for High-Speed UAVs" />
+<meta name="twitter:description" content="Compact turbine propulsion for high-speed unmanned flight." />
+<meta name="twitter:image" content="assets/clarity-engine.jpg" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"Thrust Dynamics","alternateName":"트러스트 다이나믹스","description":"Korea-based aerospace hardware company developing compact micro gas turbine propulsion for high-speed UAV platforms.","foundingDate":"2026","areaServed":"KR","knowsAbout":["Micro gas turbine engines","Metal additive manufacturing","Precision turbine engineering","UAV propulsion"]}
+</script>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231A5FA8'/%3E%3Cg stroke='white' stroke-width='1.4' stroke-linecap='round' fill='none'%3E%3Ccircle cx='16' cy='16' r='9.5'/%3E%3Cpath d='M16 14.4C15 12 15 10 16.4 7.6'/%3E%3Cpath d='M16 14.4C15 12 15 10 16.4 7.6' transform='rotate(72 16 16)'/%3E%3Cpath d='M16 14.4C15 12 15 10 16.4 7.6' transform='rotate(144 16 16)'/%3E%3Cpath d='M16 14.4C15 12 15 10 16.4 7.6' transform='rotate(216 16 16)'/%3E%3Cpath d='M16 14.4C15 12 15 10 16.4 7.6' transform='rotate(288 16 16)'/%3E%3C/g%3E%3Ccircle cx='16' cy='16' r='2.1' fill='white'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<style>
+:root{
+  --paper:#fff;--paper-2:#F4F6F9;--paper-3:#E9EEF3;--ink-band:#0B1622;
+  --ink:#0E1B28;--ink-soft:#46566A;--muted:#7C8896;--line:#E3E8ED;--line-strong:#CDD6DE;
+  --accent:#1A5FA8;--accent-deep:#123E6E;--accent-bright:#2B7FD4;--accent-tint:#EAF1F9;--accent-tint2:#DBE8F5;
+  --hero-bg:#0a1220;
+  --fh:"Space Grotesk","Pretendard","Pretendard Variable",system-ui,sans-serif;
+  --fb:"Inter","Pretendard","Pretendard Variable",system-ui,sans-serif;
+  --fk:"Pretendard","Pretendard Variable","Noto Sans KR",system-ui,sans-serif;
+  --s1:8px;--s2:16px;--s3:24px;--s4:32px;--s5:48px;--s6:64px;--s7:80px;--s8:96px;--s9:120px;
+  --rad-sm:6px;--rad-md:10px;--rad-lg:16px;--rad-xl:22px;
+  --hh:76px;--maxw:1220px;--ease:cubic-bezier(.16,1,.3,1);
+  --sh-sm:0 1px 2px rgba(14,27,40,.04),0 1px 3px rgba(14,27,40,.06);
+  --sh-md:0 6px 18px rgba(14,27,40,.07),0 2px 6px rgba(14,27,40,.05);
+  --sh-lg:0 24px 56px rgba(14,27,40,.14),0 8px 18px rgba(14,27,40,.07);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:var(--hh)}
+body{background:var(--paper);color:var(--ink);font-family:var(--fb);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+img,video{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
+ul,ol{list-style:none}
+input,textarea,select{font:inherit;color:var(--ink)}
+sup{font-size:.6em}
+::selection{background:var(--accent-tint2);color:var(--accent-deep)}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+/* Korean type */
+html[lang="ko"] body{font-family:var(--fk)}
+html[lang="ko"] h1,html[lang="ko"] h2,html[lang="ko"] h3,html[lang="ko"] h4{font-family:var(--fk);letter-spacing:-.01em;font-weight:700}
+html[lang="ko"] .hero-h{letter-spacing:-.018em;line-height:1.22}
+html[lang="ko"] .sec-title{line-height:1.3}
+html[lang="ko"] .kicker,html[lang="ko"] .nav a,html[lang="ko"] .btn,html[lang="ko"] .logo-t,html[lang="ko"] .cap-t,html[lang="ko"] .card-t,html[lang="ko"] label,html[lang="ko"] .chip,html[lang="ko"] .stat-l,html[lang="ko"] .tag,html[lang="ko"] .flow .ft,html[lang="ko"] .role{font-family:var(--fk)}
+html[lang="ko"] .kicker{text-transform:none;letter-spacing:.02em}
+html[lang="ko"] .nav a{font-weight:500}
+html[lang="ko"] .lead,html[lang="ko"] .sec-intro,html[lang="ko"] .hero-sub,html[lang="ko"] .card-d,html[lang="ko"] .cap-d{line-height:1.8}
+
+.wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 var(--s4)}
+.hidden{display:none!important}
+.skip{position:absolute;left:-9999px;top:0;z-index:300;background:var(--accent);color:#fff;padding:11px 18px;border-radius:0 0 var(--rad-sm) 0;font-family:var(--fh);font-size:14px;font-weight:600}
+.skip:focus{left:0}
+html[lang="ko"] .skip{font-family:var(--fk)}
+.ct-email{display:inline-flex;align-items:center;gap:9px;margin-top:var(--s3);font-family:var(--fh);font-size:15px;font-weight:600;color:var(--accent);transition:color .18s}
+.ct-email:hover{color:var(--accent-deep);text-decoration:underline}
+.ct-email:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+.hp{position:absolute!important;left:-9999px!important;width:1px;height:1px;overflow:hidden}
+.fconsent{font-size:12px;line-height:1.5;color:var(--muted);margin-top:-4px}
+.ferror-note{display:none;font-size:13px;line-height:1.55;color:#B83C45;background:#FBEDED;border:1px solid #F2CFD2;border-radius:var(--rad-sm);padding:12px 14px}
+.ferror-note.show{display:block}
+.ferror-note a{color:var(--accent-deep);font-weight:600;text-decoration:underline}
+
+/* type */
+.kicker{display:inline-flex;align-items:center;gap:10px;font-family:var(--fh);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:var(--s2)}
+.kicker::before{content:"";width:24px;height:2px;background:var(--accent);border-radius:2px}
+.sec-head{max-width:780px;margin-bottom:var(--s6)}
+.sec-head.center{margin-left:auto;margin-right:auto;text-align:center}
+.sec-head.center .kicker{justify-content:center}
+.sec-title{font-family:var(--fh);font-weight:700;font-size:clamp(28px,3.6vw,46px);line-height:1.12;letter-spacing:-.02em;color:var(--ink)}
+.sec-intro{margin-top:var(--s3);color:var(--ink-soft);font-size:15.5px}
+.sec-head.center .sec-intro{max-width:64ch;margin-left:auto;margin-right:auto}
+.lead{font-size:16px;line-height:1.8;color:var(--ink-soft);max-width:60ch}
+.lead strong{color:var(--ink);font-weight:600}
+.subhead{display:flex;align-items:baseline;gap:14px;margin:var(--s6) 0 var(--s3)}
+.subhead .sn{font-family:var(--fh);font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--accent)}
+.subhead h3{font-family:var(--fh);font-size:clamp(18px,2vw,23px);font-weight:600;color:var(--ink);letter-spacing:-.01em}
+.subhead .ln{flex:1;height:1px;background:var(--line)}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:var(--fh);font-size:14px;font-weight:600;letter-spacing:.01em;padding:12px 22px;border-radius:100px;border:1px solid transparent;white-space:nowrap;transition:background .2s var(--ease),color .2s,border-color .2s,transform .15s,box-shadow .2s}
+.btn:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.btn-primary{background:var(--accent);color:#fff;border-color:var(--accent);box-shadow:var(--sh-sm)}
+.btn-primary:hover{background:var(--accent-deep);border-color:var(--accent-deep)}
+.btn-primary:active{transform:translateY(1px)}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--line-strong)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-tint)}
+.btn-lg{padding:14px 28px;font-size:15px}
+.btn-sm{padding:9px 18px;font-size:13px}
+
+/* header */
+.hdr{position:fixed;top:0;left:0;right:0;z-index:100;height:var(--hh);transition:background .3s var(--ease),border-color .3s,box-shadow .3s,backdrop-filter .3s;border-bottom:1px solid transparent}
+.hdr-in{height:100%;display:flex;align-items:center;gap:var(--s4);max-width:var(--maxw);margin:0 auto;padding:0 var(--s4)}
+.logo{display:flex;align-items:center;gap:11px;flex-shrink:0;color:var(--accent)}
+.logo-mark{flex-shrink:0}
+.logo-type{display:flex;flex-direction:column;line-height:1.04}
+.logo-t{font-family:var(--fh);font-size:16px;font-weight:700;letter-spacing:.14em;color:var(--ink)}
+.logo-d{font-size:8.5px;font-weight:600;letter-spacing:.3em;color:var(--muted);font-family:var(--fh)}
+.nav{display:flex;align-items:center;gap:var(--s4);margin-left:auto}
+.nav a{font-family:var(--fh);font-size:14px;font-weight:500;color:var(--ink-soft);letter-spacing:.01em;padding:6px 0;position:relative;transition:color .18s}
+.nav a::after{content:"";position:absolute;left:0;bottom:-3px;width:0;height:2px;background:currentColor;border-radius:2px;transition:width .22s var(--ease)}
+.nav a:hover{color:var(--ink)}.nav a:hover::after,.nav a.active::after{width:100%}.nav a.active{color:var(--ink)}
+.actions{display:flex;align-items:center;gap:var(--s2)}
+.lang{display:flex;align-items:center;gap:5px;font-family:var(--fh);font-size:12px;font-weight:600;letter-spacing:.05em;color:var(--muted)}
+.lang .o{cursor:pointer;padding:2px;transition:color .18s}
+.lang .o:hover{color:var(--ink-soft)}.lang .o.active{color:var(--accent)}
+.lang .d{color:var(--line-strong)}
+.burger{display:none;flex-direction:column;gap:5px;padding:8px}
+.burger span{display:block;width:22px;height:2px;background:var(--ink);border-radius:2px;transition:.2s}
+.burger[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.burger[aria-expanded="true"] span:nth-child(2){opacity:0}
+.burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+/* header transparent over hero (light text) */
+.hdr:not(.scrolled){background:linear-gradient(180deg,rgba(8,14,22,.55),transparent)}
+.hdr:not(.scrolled) .logo,.hdr:not(.scrolled) .logo-mark{color:#fff}
+.hdr:not(.scrolled) .logo-t{color:#fff}
+.hdr:not(.scrolled) .logo-d{color:rgba(255,255,255,.6)}
+.hdr:not(.scrolled) .nav a{color:rgba(255,255,255,.82)}
+.hdr:not(.scrolled) .nav a:hover,.hdr:not(.scrolled) .nav a.active{color:#fff}
+.hdr:not(.scrolled) .lang .o{color:rgba(255,255,255,.6)}
+.hdr:not(.scrolled) .lang .o.active{color:#fff}
+.hdr:not(.scrolled) .lang .d{color:rgba(255,255,255,.35)}
+.hdr:not(.scrolled) .burger span{background:#fff}
+.hdr.scrolled{background:rgba(255,255,255,.86);backdrop-filter:blur(14px) saturate(1.4);-webkit-backdrop-filter:blur(14px) saturate(1.4);border-color:var(--line);box-shadow:var(--sh-sm)}
+.mnav{display:none;flex-direction:column;gap:2px;background:var(--paper);border-bottom:1px solid var(--line);padding:var(--s2) var(--s4) var(--s3);box-shadow:var(--sh-md)}
+.mnav.open{display:flex}
+.mnav a{font-family:var(--fh);font-size:16px;font-weight:500;color:var(--ink-soft);padding:13px 0;border-bottom:1px solid var(--line)}
+.mnav .btn{margin-top:var(--s2)}
+
+/* HERO — full-bleed cinematic video */
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:center;overflow:hidden;background:var(--hero-bg);isolation:isolate}
+.hero-stage{position:absolute;inset:0;z-index:-3;background:var(--hero-bg)}
+.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;background:var(--hero-bg)}
+@media (max-width:760px){.hero-video{object-position:54% 50%}}
+.hero-grid{position:absolute;inset:0;z-index:-2;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:66px 66px;-webkit-mask-image:radial-gradient(ellipse 80% 70% at 30% 40%,#000,transparent 75%);mask-image:radial-gradient(ellipse 80% 70% at 30% 40%,#000,transparent 75%);opacity:.55;pointer-events:none}
+.hero-scrim{position:absolute;inset:0;z-index:-1;pointer-events:none;background:
+  linear-gradient(98deg,rgba(8,15,26,.9) 0%,rgba(8,15,26,.66) 34%,rgba(8,15,26,.28) 62%,rgba(8,15,26,.5) 100%),
+  radial-gradient(120% 120% at 70% 30%,transparent 40%,rgba(8,15,26,.45) 100%)}
+.hero-fade{position:absolute;left:0;right:0;bottom:0;height:130px;z-index:-1;background:linear-gradient(180deg,transparent,var(--paper));pointer-events:none}
+.hero-in{position:relative;z-index:1;width:100%;padding-top:calc(var(--hh) + var(--s5));padding-bottom:var(--s8)}
+.hero-badge{display:inline-flex;align-items:center;gap:9px;font-family:var(--fh);font-size:11.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#fff;border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.07);backdrop-filter:blur(6px);border-radius:100px;padding:7px 15px;margin-bottom:var(--s3)}
+html[lang="ko"] .hero-badge{letter-spacing:.04em;text-transform:none;font-family:var(--fk)}
+.hero-badge .dot{width:7px;height:7px;border-radius:50%;background:#FF8A3C;box-shadow:0 0 0 0 rgba(255,138,60,.5);animation:pulse 2.2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(255,138,60,.5)}50%{opacity:.65;box-shadow:0 0 0 6px rgba(255,138,60,0)}}
+.hero-h{font-family:var(--fh);font-weight:700;font-size:clamp(38px,6vw,76px);line-height:1.04;letter-spacing:-.03em;color:#fff;max-width:15ch;text-shadow:0 2px 30px rgba(0,0,0,.35)}
+.hero-sub{margin:var(--s3) 0 var(--s5);font-size:clamp(15px,1.5vw,19px);line-height:1.65;color:rgba(255,255,255,.82);max-width:50ch}
+/* EN hero: the English copy is longer than the Korean, so fit it into the SAME 100svh height — otherwise the hero grows and the background video scales up (zooms). Tune EN text only; Korean stays the reference. */
+html[lang="en"] .hero-h{font-size:clamp(30px,3.6vw,52px);line-height:1.12;letter-spacing:-.02em;max-width:26ch}
+html[lang="en"] .hero-sub{font-size:clamp(14px,1.25vw,16.5px);line-height:1.55;max-width:48ch;margin:var(--s3) 0 var(--s4)}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px}
+.hero .btn-ghost{color:#fff;border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.04);backdrop-filter:blur(6px)}
+.hero .btn-ghost:hover{background:rgba(255,255,255,.12);border-color:#fff;color:#fff}
+.hero-stats{display:flex;gap:var(--s5);margin-top:var(--s6);padding-top:var(--s4);border-top:1px solid rgba(255,255,255,.16);max-width:620px}
+.hero-stats .st{display:flex;flex-direction:column;gap:4px}
+.hero-stats .sv{font-family:var(--fh);font-size:clamp(20px,2.4vw,28px);font-weight:700;color:#fff;line-height:1;display:flex;align-items:baseline;gap:4px}
+.hero-stats .sv span{font-size:12px;font-weight:600;color:#9DC4EC}
+.hero-stats .sl{font-size:12px;color:rgba(255,255,255,.62)}
+
+/* sections */
+.sec{padding:var(--s9) 0}
+.sec-sys{background:var(--paper)}
+.sec-co{background:var(--paper-2);border-top:1px solid var(--line)}
+.sec-cap{background:var(--paper);border-top:1px solid var(--line)}
+.sec-mfg{background:var(--paper-2);border-top:1px solid var(--line)}
+.sec-ct{background:var(--paper);border-top:1px solid var(--line)}
+
+/* media card grid (equipment + components + application) */
+.mgrid{display:grid;gap:var(--s3)}
+.mgrid.c4{grid-template-columns:repeat(4,1fr)}
+.mgrid.c3{grid-template-columns:repeat(3,1fr)}
+.mgrid.c2{grid-template-columns:repeat(2,1fr)}
+.mcard{background:var(--paper);border:1px solid var(--line);border-radius:var(--rad-lg);overflow:hidden;box-shadow:var(--sh-sm);transition:transform .25s var(--ease),box-shadow .25s,border-color .25s}
+.mcard:hover{transform:translateY(-3px);box-shadow:var(--sh-md);border-color:var(--accent-tint2)}
+.mcard-media{position:relative;aspect-ratio:4/3;overflow:hidden;background:var(--paper-3)}
+.mcard-media.sq{aspect-ratio:1/1}
+.mcard-media img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
+.mcard:hover .mcard-media img{transform:scale(1.05)}
+.mcard-scale{position:absolute;right:10px;bottom:10px;font-family:var(--fh);font-size:10.5px;font-weight:600;letter-spacing:.04em;color:#fff;background:rgba(12,26,40,.66);backdrop-filter:blur(4px);padding:4px 9px;border-radius:100px}
+.mcard-b{padding:16px 18px}
+.mcard-b .n{font-family:var(--fh);font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--accent);display:block;margin-bottom:5px}
+.card-t{font-family:var(--fh);font-size:14.5px;font-weight:600;color:var(--ink);line-height:1.3}
+.card-d{font-size:12.5px;line-height:1.6;color:var(--ink-soft);margin-top:5px}
+
+/* engine feature */
+.engine{display:grid;grid-template-columns:1.15fr .85fr;gap:var(--s6);align-items:center;margin-top:var(--s5);background:var(--paper);border:1px solid var(--line);border-radius:var(--rad-xl);padding:var(--s5);box-shadow:var(--sh-sm)}
+.engine-media{aspect-ratio:4/3;border-radius:var(--rad-lg);overflow:hidden;background:var(--paper-3);border:1px solid var(--line)}
+.engine-media img{width:100%;height:100%;object-fit:cover}
+.engine h3{font-family:var(--fh);font-size:clamp(20px,2.4vw,28px);font-weight:700;color:var(--ink);letter-spacing:-.01em;margin-bottom:var(--s2)}
+.engine p{font-size:14.5px;line-height:1.7;color:var(--ink-soft);margin-bottom:var(--s3)}
+.chips{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.chip{display:flex;flex-direction:column;gap:2px;padding:11px 14px;background:var(--paper-2);border:1px solid var(--line);border-radius:var(--rad-md)}
+.chip .cv{font-family:var(--fh);font-size:15px;font-weight:700;color:var(--ink)}
+.chip .cl{font-size:11px;color:var(--muted)}
+
+/* cutaway / how it works */
+.howfig{position:relative;margin-top:var(--s5);border-radius:var(--rad-lg);overflow:hidden;border:1px solid var(--line);box-shadow:var(--sh-md);background:#0e2240;line-height:0}
+.howfig-img{display:block;width:100%;height:auto}
+.howfig-svg{position:absolute;inset:0;width:100%;height:100%}
+.howfig-svg .lead{stroke:#CFE6FF;stroke-width:2.6;opacity:.92;stroke-linecap:round}
+.howfig-svg .dot{fill:#CFE6FF;animation:dotpulse 2.4s ease-in-out infinite}
+.howfig-glow{position:absolute;top:8%;bottom:8%;left:40%;width:20%;pointer-events:none;background:radial-gradient(ellipse at center,rgba(255,150,60,.55),transparent 70%);mix-blend-mode:screen;opacity:.28;animation:glowpulse 3.6s ease-in-out infinite}
+.howfig-shimmer{position:absolute;inset:0;pointer-events:none;background:linear-gradient(105deg,transparent 38%,rgba(255,255,255,.10) 50%,transparent 62%);transform:translateX(-120%);animation:shimmer 7.5s ease-in-out infinite;mix-blend-mode:screen}
+@keyframes glowpulse{0%,100%{opacity:.16}50%{opacity:.46}}
+@keyframes shimmer{0%{transform:translateX(-120%)}55%,100%{transform:translateX(120%)}}
+@keyframes dotpulse{0%,100%{opacity:.5}50%{opacity:1}}
+.archvid{position:relative;aspect-ratio:16/9;border-radius:var(--rad-lg);overflow:hidden;border:1px solid var(--line);box-shadow:var(--sh-lg);background:#0e1726;margin-top:var(--s5)}
+.archvid-media{width:100%;height:100%;object-fit:cover;display:block}
+.archvid-scrim{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(8,14,24,.5),transparent 22%,transparent 74%,rgba(8,14,24,.55))}
+.cl{position:absolute;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:5px;pointer-events:none;z-index:2}
+.cl-t{top:5.5%}
+.cl-b{bottom:5.5%;flex-direction:column-reverse}
+.cl-chip{display:inline-flex;align-items:center;gap:8px;background:rgba(10,17,28,.62);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px);border:1px solid rgba(255,255,255,.18);border-radius:100px;padding:6px 14px;white-space:nowrap;box-shadow:0 6px 18px rgba(0,0,0,.35)}
+.cl-n{font-family:var(--fh);font-size:11px;font-weight:700;color:#79b6f0;letter-spacing:.04em}
+.cl-l{font-family:var(--fh);font-size:12.5px;font-weight:600;color:#fff;letter-spacing:.01em}
+html[lang="ko"] .cl-l{font-family:var(--fk)}
+.cl-stem{width:1.5px;height:30px;background:linear-gradient(to bottom,rgba(255,255,255,.85),rgba(255,255,255,.12))}
+.cl-b .cl-stem{background:linear-gradient(to top,rgba(255,255,255,.85),rgba(255,255,255,.12))}
+.cl-dot{width:7px;height:7px;border-radius:50%;background:#fff;box-shadow:0 0 0 4px rgba(120,180,240,.25)}
+@media (max-width:760px){.cl{display:none}}
+.arch-intro{max-width:74ch;margin-top:var(--s3);font-size:15px;line-height:1.7;color:var(--ink-soft)}
+.arch{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--s2);margin-top:var(--s4)}
+.arch-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--rad-md);padding:var(--s3);display:flex;flex-direction:column;gap:9px;transition:border-color .2s,box-shadow .2s,transform .2s}
+.arch-card:hover{border-color:var(--accent-tint2);box-shadow:var(--sh-sm);transform:translateY(-2px)}
+.arch-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.arch-n{font-family:var(--fh);font-size:13px;font-weight:700;color:var(--accent);letter-spacing:.06em}
+.arch-tag{font-family:var(--fh);font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:var(--paper-2);border:1px solid var(--line);border-radius:100px;padding:3px 9px;white-space:nowrap}
+html[lang="ko"] .arch-tag{text-transform:none;letter-spacing:.02em;font-family:var(--fk)}
+.arch-card h4{font-family:var(--fh);font-size:15px;font-weight:600;color:var(--ink)}
+.arch-card p{font-size:12.5px;line-height:1.6;color:var(--ink-soft)}
+@media (max-width:900px){.arch{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.arch{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.howfig-glow,.howfig-shimmer{animation:none}.howfig-svg .dot{animation:none;opacity:.9}}
+.howfig-svg .badge{fill:var(--accent);stroke:#fff;stroke-width:2.5}
+.howfig-svg .ring{fill:none;stroke:#9DC4EC;stroke-width:2;opacity:.4}
+.howfig-svg .bnum{fill:#fff;font-family:var(--fh);font-weight:700;font-size:30px;letter-spacing:.02em}
+.howfig-svg .blabel{font-family:var(--fh);font-weight:600;font-size:27px;fill:#fff;paint-order:stroke;stroke:#08172b;stroke-width:5px;stroke-linejoin:round;letter-spacing:.04em}
+html[lang="ko"] .howfig-svg .blabel{font-family:var(--fk);letter-spacing:0}
+.howlegend{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--s3);margin-top:var(--s4)}
+.howlegend li{display:flex;flex-direction:column;gap:3px;padding-left:14px;border-left:2px solid var(--accent-tint2)}
+.howlegend .ln{font-family:var(--fh);font-size:12px;font-weight:700;letter-spacing:.06em;color:var(--accent)}
+.howlegend .lt{font-family:var(--fh);font-size:14.5px;font-weight:600;color:var(--ink)}
+.howlegend .ld{font-size:12.5px;line-height:1.5;color:var(--ink-soft)}
+@media (max-width:760px){.howlegend{grid-template-columns:1fr 1fr}.howfig-svg .blabel{display:none}}
+@media (max-width:460px){.howlegend{grid-template-columns:1fr}}
+.cut{margin-top:var(--s5);display:grid;grid-template-columns:1.3fr .7fr;gap:var(--s5);align-items:center}
+.cut-media{border-radius:var(--rad-lg);overflow:hidden;border:1px solid var(--line);box-shadow:var(--sh-md);background:#10243f}
+.cut-media img{width:100%;height:auto;display:block}
+.flow{display:flex;flex-direction:column;gap:0}
+.flow .ft{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--line)}
+.flow .ft:last-child{border-bottom:none}
+.flow .fn{font-family:var(--fh);font-size:12px;font-weight:700;color:var(--accent);width:26px;flex-shrink:0}
+.flow .fl{font-family:var(--fh);font-size:15px;font-weight:600;color:var(--ink)}
+.flow .fd{font-size:12.5px;color:var(--muted);margin-left:6px}
+
+/* application bullets */
+.shots{display:grid;grid-template-columns:1fr 1fr;gap:var(--s3);margin-top:var(--s5)}
+.shot{position:relative;border-radius:var(--rad-lg);overflow:hidden;border:1px solid var(--line);box-shadow:var(--sh-md);background:#10243f;margin:0}
+.shot img{width:100%;height:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+.shot figcaption{position:absolute;left:14px;bottom:12px;font-family:var(--fh);font-size:11px;font-weight:600;letter-spacing:.03em;color:#fff;background:rgba(12,26,40,.62);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);padding:6px 12px;border-radius:100px}
+html[lang="ko"] .shot figcaption{font-family:var(--fk)}
+@media (max-width:600px){.shots{grid-template-columns:1fr}}
+.app-pts{display:flex;flex-direction:column;gap:14px;margin-top:var(--s3)}
+.app-pts li{display:flex;gap:12px;align-items:flex-start;font-size:14.5px;line-height:1.6;color:var(--ink-soft)}
+.app-pts li::before{content:"";width:8px;height:8px;border-radius:2px;background:var(--accent);margin-top:7px;flex-shrink:0}
+.app-pts strong{color:var(--ink);font-weight:600}
+
+/* company */
+.co-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:var(--s7);align-items:center}
+.co-media{aspect-ratio:5/4;border-radius:var(--rad-lg);overflow:hidden;border:1px solid var(--line);box-shadow:var(--sh-md);background:#10243f}
+.co-media img{width:100%;height:100%;object-fit:cover}
+.co-facts{margin-top:var(--s4);border-top:1px solid var(--line)}
+.co-facts .r{display:grid;grid-template-columns:130px 1fr;gap:var(--s2);padding:12px 0;border-bottom:1px solid var(--line)}
+.co-facts .k{font-family:var(--fh);font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+html[lang="ko"] .co-facts .k{text-transform:none;letter-spacing:0;font-family:var(--fk)}
+.co-facts .v{font-size:14px;font-weight:600;color:var(--ink)}
+.vision{margin-top:var(--s6);padding:var(--s4) var(--s5);background:var(--accent-tint);border:1px solid var(--accent-tint2);border-left:3px solid var(--accent);border-radius:var(--rad-md)}
+.vision p{font-size:clamp(15px,1.5vw,18px);line-height:1.6;color:var(--accent-deep)}
+.vision strong{font-weight:700}
+
+/* capabilities */
+.caps{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--rad-lg);overflow:hidden}
+.cap{background:var(--paper);padding:var(--s4);display:flex;flex-direction:column;gap:var(--s2);transition:background .2s}
+.cap:hover{background:var(--paper-2)}
+.cap-ic{width:40px;height:40px;color:var(--accent);display:flex;align-items:center;justify-content:center;border:1px solid var(--accent-tint2);border-radius:var(--rad-sm);background:var(--accent-tint);padding:9px}
+.cap-ic svg{width:100%;height:100%}
+.cap-t{font-family:var(--fh);font-size:15px;font-weight:600;color:var(--ink);line-height:1.3;margin-top:4px}
+.cap-d{font-size:13px;line-height:1.65;color:var(--ink-soft)}
+
+/* manufacturing */
+.mfg{display:grid;grid-template-columns:1fr 1fr;gap:var(--s7);align-items:center}
+.mfg-media{position:relative;aspect-ratio:4/3;border-radius:var(--rad-lg);overflow:hidden;border:1px solid var(--line);box-shadow:var(--sh-md);background:var(--paper-3)}
+.mfg-media img{width:100%;height:100%;object-fit:cover}
+.mfg-tag{position:absolute;left:16px;bottom:16px;font-family:var(--fh);font-size:11px;font-weight:600;letter-spacing:.04em;color:#fff;background:rgba(12,26,40,.7);backdrop-filter:blur(6px);padding:7px 13px;border-radius:100px}
+.mpts{display:flex;flex-direction:column;gap:var(--s3);margin-top:var(--s4)}
+.mpts li{padding-left:var(--s3);position:relative}
+.mpts li::before{content:"";position:absolute;left:0;top:7px;width:8px;height:8px;background:var(--accent);border-radius:2px}
+.mpts strong{display:block;font-family:var(--fh);font-size:15px;font-weight:600;color:var(--ink);margin-bottom:3px}
+.mpts span{font-size:14px;line-height:1.6;color:var(--ink-soft)}
+
+/* contact */
+.ct{display:grid;grid-template-columns:.9fr 1.1fr;gap:var(--s7);align-items:start}
+.ct-meta{display:flex;align-items:center;gap:var(--s2);font-size:13px;color:var(--muted);margin-top:var(--s4)}
+.ct-meta .d{color:var(--line-strong)}
+.form{display:flex;flex-direction:column;gap:var(--s3);background:var(--paper);border:1px solid var(--line);border-radius:var(--rad-lg);padding:var(--s5);box-shadow:var(--sh-sm)}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:var(--s3)}
+.fg{display:flex;flex-direction:column;gap:7px}
+.fg label{font-family:var(--fh);font-size:12px;font-weight:600;letter-spacing:.03em;color:var(--ink)}
+.req{color:var(--accent)}
+.fg input,.fg textarea,.fg select{background:var(--paper);border:1px solid var(--line-strong);border-radius:var(--rad-sm);padding:12px 14px;font-size:14px;color:var(--ink);width:100%;min-height:46px;appearance:none;-webkit-appearance:none;transition:border-color .2s,box-shadow .2s}
+.fg select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237C8896' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:38px}
+.fg input:focus,.fg textarea:focus,.fg select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-tint)}
+.fg input.invalid,.fg textarea.invalid,.fg select.invalid{border-color:#D9444F}
+.fg input::placeholder,.fg textarea::placeholder{color:var(--muted)}
+.fg textarea{resize:vertical;min-height:118px;line-height:1.6}
+.ferr{font-size:12px;color:#D9444F;min-height:15px}
+.fsubmit{align-self:flex-start;min-width:170px}
+.fsubmit:disabled{opacity:.6;cursor:not-allowed}
+.floading svg{animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.fsuccess[hidden]{display:none!important}
+.fsuccess{display:flex;align-items:center;gap:var(--s2);background:var(--accent-tint);border:1px solid var(--accent-tint2);border-radius:var(--rad-sm);padding:14px 18px;font-size:14px;color:var(--accent-deep)}
+.fsuccess svg{color:var(--accent);flex-shrink:0}
+
+/* footer */
+.ftr{background:var(--ink-band);color:#C9D3DD;padding:var(--s7) 0 var(--s4)}
+.ftr-in{display:flex;flex-direction:column;gap:var(--s5)}
+.ftr-top{display:flex;justify-content:space-between;align-items:flex-start;gap:var(--s5);flex-wrap:wrap}
+.ftr .logo,.ftr .logo-mark{color:var(--accent-bright)}
+.ftr .logo-t{color:#fff}.ftr .logo-d{color:#7E8C9B}
+.ftr-tag{font-size:13px;color:#8493A2;margin-top:10px;max-width:40ch}
+.ftr-links{display:flex;flex-wrap:wrap;gap:var(--s4)}
+.ftr-links a{font-family:var(--fh);font-size:14px;font-weight:500;color:#9FAEBC;transition:color .18s}
+html[lang="ko"] .ftr-links a{font-family:var(--fk)}
+.ftr-links a:hover{color:#fff}
+.ftr-bot{display:flex;flex-direction:column;gap:var(--s2);padding-top:var(--s4);border-top:1px solid rgba(255,255,255,.1);font-size:12px;color:#6F7E8D}
+.disc{font-size:11px;line-height:1.7;color:#6F7E8D;max-width:94ch}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+
+/* responsive */
+@media (max-width:1080px){
+  .mgrid.c4{grid-template-columns:repeat(2,1fr)}
+  .engine,.cut,.co-grid,.mfg,.ct{grid-template-columns:1fr;gap:var(--s5)}
+  .co-media{order:-1;max-width:620px}
+  .caps{grid-template-columns:repeat(2,1fr)}
+  .hero-h{font-size:clamp(36px,8vw,60px)}
+}
+@media (max-width:760px){
+  :root{--s9:72px;--hh:64px}
+  .nav{display:none}.actions .btn-primary{display:none}.burger{display:flex}
+  .mgrid.c3{grid-template-columns:repeat(2,1fr)}
+  .caps{grid-template-columns:1fr}
+  .frow{grid-template-columns:1fr}
+  .chips{grid-template-columns:1fr 1fr}
+  .hero-stats{flex-wrap:wrap;gap:var(--s4)}
+}
+@media (max-width:480px){
+  .wrap{padding:0 var(--s3)}
+  .mgrid.c4,.mgrid.c3,.mgrid.c2{grid-template-columns:1fr}
+  .hero-cta{flex-direction:column}.hero-cta .btn{width:100%}
+  .hero-stats{gap:var(--s3)}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#system" data-ko="본문으로 건너뛰기" data-en="Skip to content">본문으로 건너뛰기</a>
+
+<!-- HEADER -->
+<header class="hdr" id="hdr">
+  <div class="hdr-in">
+    <a href="#hero" class="logo" aria-label="Thrust Dynamics">
+      <svg class="logo-mark" width="34" height="34" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <circle cx="16" cy="16" r="13.2" stroke="currentColor" stroke-width="1.4"/>
+        <g stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+          <path d="M16 13.6 C 14.9 10.6, 14.9 8.2, 16.6 5.2"/>
+          <path d="M16 13.6 C 14.9 10.6, 14.9 8.2, 16.6 5.2" transform="rotate(72 16 16)"/>
+          <path d="M16 13.6 C 14.9 10.6, 14.9 8.2, 16.6 5.2" transform="rotate(144 16 16)"/>
+          <path d="M16 13.6 C 14.9 10.6, 14.9 8.2, 16.6 5.2" transform="rotate(216 16 16)"/>
+          <path d="M16 13.6 C 14.9 10.6, 14.9 8.2, 16.6 5.2" transform="rotate(288 16 16)"/>
+        </g>
+        <circle cx="16" cy="16" r="2.3" fill="currentColor"/>
+      </svg>
+      <span class="logo-type"><span class="logo-t">THRUST&nbsp;DYNAMICS</span><span class="logo-d">AEROSPACE&nbsp;PROPULSION</span></span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="#system" data-ko="시스템" data-en="System">시스템</a>
+      <a href="#company" data-ko="회사" data-en="Company">회사</a>
+      <a href="#capabilities" data-ko="역량" data-en="Capabilities">역량</a>
+      <a href="#manufacturing" data-ko="제조" data-en="Manufacturing">제조</a>
+      <a href="#contact" data-ko="문의" data-en="Contact">문의</a>
+    </nav>
+    <div class="actions">
+      <div class="lang" id="lang" aria-label="Language"><span class="o" data-lang="ko">KO</span><span class="d">/</span><span class="o" data-lang="en">EN</span></div>
+      <a href="#contact" class="btn btn-primary btn-sm" data-ko="문의하기" data-en="Contact">문의하기</a>
+      <button class="burger" id="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <div class="mnav" id="mnav" aria-hidden="true">
+    <a href="#system" data-ko="시스템" data-en="System">시스템</a>
+    <a href="#company" data-ko="회사" data-en="Company">회사</a>
+    <a href="#capabilities" data-ko="역량" data-en="Capabilities">역량</a>
+    <a href="#manufacturing" data-ko="제조" data-en="Manufacturing">제조</a>
+    <a href="#contact" data-ko="문의" data-en="Contact">문의</a>
+    <a href="#contact" class="btn btn-primary" data-ko="문의하기" data-en="Contact Team">문의하기</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-stage" aria-hidden="true">
+    <video class="hero-video" id="hero-video" autoplay muted loop playsinline preload="auto" tabindex="-1" disablepictureinpicture poster="assets/poster/hero-master.jpg"></video>
+  </div>
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="hero-scrim" aria-hidden="true"></div>
+  <div class="hero-fade" aria-hidden="true"></div>
+
+  <div class="wrap hero-in">
+    <div class="hero-badge"><span class="dot"></span><span data-ko="2026년 9월 공식 출범 예정" data-en="Opening planned · September 2026">2026년 9월 공식 출범 예정</span></div>
+    <h1 class="hero-h">
+      <span class="ko-text">고속 무인 비행을 위한<br/>소형 제트 추진</span>
+      <span class="en-text hidden">Compact jet propulsion<br/>for high-speed<br/>unmanned flight</span>
+    </h1>
+    <p class="hero-sub ko-text">제트엔진급 추진 원리를 고성능 금속 적층제조와 정밀 터빈 엔지니어링으로 구현합니다. 설계부터 제조까지 통합한, 제조 가능한 UAV급 추진 시스템.</p>
+    <p class="hero-sub en-text hidden">Jet-engine-class propulsion principles, realized through advanced metal additive manufacturing and precision turbine engineering — a manufacturable, UAV-scale system, integrated from design to production.</p>
+    <div class="hero-cta">
+      <a href="#system" class="btn btn-primary btn-lg" data-ko="시스템 살펴보기" data-en="Explore the System">시스템 살펴보기</a>
+      <a href="#contact" class="btn btn-ghost btn-lg" data-ko="문의하기" data-en="Contact Team">문의하기</a>
+    </div>
+    <div class="hero-stats">
+      <div class="st"><span class="sv">18–40<span>kgf</span></span><span class="sl ko-text">추력 클래스</span><span class="sl en-text hidden">Thrust class</span></div>
+      <div class="st"><span class="sv">400–700<sup>+</sup><span>km/h</span></span><span class="sl ko-text">목표 속도</span><span class="sl en-text hidden">Target speed</span></div>
+      <div class="st"><span class="sv">15–40<span>kg</span></span><span class="sl ko-text">적용 UAV</span><span class="sl en-text hidden">UAV class</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SYSTEM: machine → components → engine → UAV -->
+<section class="sec sec-sys" id="system">
+  <div class="wrap">
+    <div class="sec-head center">
+      <div class="kicker" data-ko="시스템 개요" data-en="System Overview">시스템 개요</div>
+      <h2 class="sec-title ko-text">장비에서 부품, 엔진,<br/>그리고 무인기까지</h2>
+      <h2 class="sec-title en-text hidden">From equipment to components,<br/>engine, and unmanned flight</h2>
+      <p class="sec-intro ko-text">고성능 산업용 제조 장비로 정밀 터빈 부품을 생산하고, 이를 소형 가스터빈 엔진으로 통합하여 고속 UAV 추진 시스템으로 완성합니다.</p>
+      <p class="sec-intro en-text hidden">High-end industrial equipment produces precision turbine components, which integrate into a compact gas turbine engine — and ultimately into high-speed UAV propulsion.</p>
+    </div>
+
+    <!-- Equipment -->
+    <div class="subhead">
+      <span class="sn">01</span>
+      <h3 class="ko-text">개발 · 제조 장비</h3><h3 class="en-text hidden">Development &amp; Manufacturing Equipment</h3>
+      <span class="ln"></span>
+    </div>
+    <div class="mgrid c4">
+      <div class="mcard"><div class="mcard-media"><img src="assets/clarity-machine.jpg" alt="Metal 3D printer (LPBF)" loading="lazy"/></div><div class="mcard-b"><span class="n">LPBF</span><div class="card-t ko-text">금속 3D 프린터</div><div class="card-t en-text hidden">Metal 3D Printer</div><p class="card-d ko-text">고성능 금속 적층제조 장비.</p><p class="card-d en-text hidden">High-end metal additive system.</p></div></div>
+      <div class="mcard"><div class="mcard-media"><img src="assets/cnc.jpg" alt="5-axis CNC machining center" loading="lazy"/></div><div class="mcard-b"><span class="n">CNC</span><div class="card-t ko-text">5축 정밀가공</div><div class="card-t en-text hidden">5-Axis Machining</div><p class="card-d ko-text">블레이드·샤프트·하우징 가공.</p><p class="card-d en-text hidden">Blades, shafts, and housings.</p></div></div>
+      <div class="mcard"><div class="mcard-media"><img src="assets/balancing.jpg" alt="High-speed balancing machine" loading="lazy"/></div><div class="mcard-b"><span class="n">BAL</span><div class="card-t ko-text">초고속 발란싱</div><div class="card-t en-text hidden">High-Speed Balancing</div><p class="card-d ko-text">회전체 안정성 확보.</p><p class="card-d en-text hidden">Rotating-system stability.</p></div></div>
+      <div class="mcard"><div class="mcard-media"><img src="assets/test-rig.jpg" alt="Engine test rig" loading="lazy"/></div><div class="mcard-b"><span class="n">TEST</span><div class="card-t ko-text">엔진 테스트 리그</div><div class="card-t en-text hidden">Engine Test Rig</div><p class="card-d ko-text">성능 측정·실증 인프라.</p><p class="card-d en-text hidden">Performance &amp; validation rig.</p></div></div>
+    </div>
+
+    <!-- Components -->
+    <div class="subhead">
+      <span class="sn">02</span>
+      <h3 class="ko-text">핵심 부품</h3><h3 class="en-text hidden">Core Components</h3>
+      <span class="ln"></span>
+    </div>
+    <div class="mgrid c4">
+      <div class="mcard"><div class="mcard-media sq"><img src="assets/turbine-closeup.jpg" alt="Compressor" loading="lazy"/><span class="mcard-scale">≈ 50 mm</span></div><div class="mcard-b"><div class="card-t ko-text">압축기</div><div class="card-t en-text hidden">Compressor</div><p class="card-d ko-text">공기를 압축해 연소 효율을 높임.</p><p class="card-d en-text hidden">Compresses air for combustion.</p></div></div>
+      <div class="mcard"><div class="mcard-media sq"><img src="assets/combustor.jpg" alt="Combustor" loading="lazy"/><span class="mcard-scale">≈ 50 mm</span></div><div class="mcard-b"><div class="card-t ko-text">연소기</div><div class="card-t en-text hidden">Combustor</div><p class="card-d ko-text">연료를 연소해 고온 가스 생성.</p><p class="card-d en-text hidden">Burns fuel into hot gas.</p></div></div>
+      <div class="mcard"><div class="mcard-media sq"><img src="assets/turbine-wheel.jpg" alt="Turbine" loading="lazy"/><span class="mcard-scale">≈ 50 mm</span></div><div class="mcard-b"><div class="card-t ko-text">터빈</div><div class="card-t en-text hidden">Turbine</div><p class="card-d ko-text">고온 가스로 추력을 발생.</p><p class="card-d en-text hidden">Converts hot gas into thrust.</p></div></div>
+      <div class="mcard"><div class="mcard-media sq"><img src="assets/shaft.jpg" alt="Shaft and bearings" loading="lazy"/><span class="mcard-scale">≈ 50 mm</span></div><div class="mcard-b"><div class="card-t ko-text">샤프트 &amp; 베어링</div><div class="card-t en-text hidden">Shaft &amp; Bearings</div><p class="card-d ko-text">초고속 회전을 안정 지지.</p><p class="card-d en-text hidden">Supports ultra-high-speed rotation.</p></div></div>
+    </div>
+
+    <!-- Engine feature -->
+    <div class="subhead">
+      <span class="sn">03</span>
+      <h3 class="ko-text">마이크로 가스터빈 엔진</h3><h3 class="en-text hidden">Micro Gas Turbine Engine</h3>
+      <span class="ln"></span>
+    </div>
+    <div class="engine">
+      <div class="engine-media"><img src="assets/clarity-engine.jpg" alt="Assembled compact micro gas turbine engine" loading="lazy"/></div>
+      <div>
+        <h3 class="ko-text">18–40 kgf 클래스</h3><h3 class="en-text hidden">18–40 kgf class</h3>
+        <p class="ko-text">정밀 부품을 통합·조립하여 완성한 소형 가스터빈 엔진입니다. 고속 무인기에 요구되는 추력과 속도를 목표로 설계됩니다.</p>
+        <p class="en-text hidden">A compact gas turbine engine assembled from precision components — designed for the thrust and speed that high-speed UAVs demand.</p>
+        <div class="chips">
+          <div class="chip"><span class="cv">18–40 kgf</span><span class="cl ko-text">추력</span><span class="cl en-text hidden">Thrust</span></div>
+          <div class="chip"><span class="cv">400–700<sup>+</sup> km/h</span><span class="cl ko-text">속도 범위</span><span class="cl en-text hidden">Speed range</span></div>
+          <div class="chip"><span class="cv">10–25 kg</span><span class="cl ko-text">엔진 중량</span><span class="cl en-text hidden">Engine weight</span></div>
+          <div class="chip"><span class="cv ko-text">제트 연료</span><span class="cv en-text hidden">Jet Fuel</span><span class="cl ko-text">연료 (JP-5 / JP-8)</span><span class="cl en-text hidden">Fuel (JP-5 / JP-8)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cutaway / how it works -->
+    <div class="subhead">
+      <span class="sn">04</span>
+      <h3 class="ko-text">마이크로 터빈 시스템 아키텍처</h3><h3 class="en-text hidden">Micro Turbine System Architecture</h3>
+      <span class="ln"></span>
+    </div>
+    <p class="arch-intro ko-text">소형 터빈 추진 플랫폼 내부의 유로, 회전체, 연소 영역, 배기 시스템을 입체적으로 보여줍니다.</p>
+    <p class="arch-intro en-text hidden">A cinematic view of the flow path, rotating assemblies, combustion zone, and exhaust system inside a compact turbine propulsion platform.</p>
+    <figure class="archvid">
+      <video class="archvid-media" id="arch-video" autoplay muted loop playsinline preload="metadata" poster="assets/poster/turbine-cinematic-poster.jpg" aria-hidden="true" tabindex="-1" disablepictureinpicture>
+        <source src="assets/video/turbine-cinematic-loop.mp4" type="video/mp4"/>
+      </video>
+      <div class="archvid-scrim" aria-hidden="true"></div>
+      <div class="cl cl-t" style="left:8%"><div class="cl-chip"><span class="cl-n">01</span><span class="cl-l ko-text">흡입</span><span class="cl-l en-text hidden">Inlet</span></div><span class="cl-stem"></span><span class="cl-dot"></span></div>
+      <div class="cl cl-b" style="left:26%"><div class="cl-chip"><span class="cl-n">02</span><span class="cl-l ko-text">압축기</span><span class="cl-l en-text hidden">Compressor</span></div><span class="cl-stem"></span><span class="cl-dot"></span></div>
+      <div class="cl cl-t" style="left:50%"><div class="cl-chip"><span class="cl-n">03</span><span class="cl-l ko-text">연소</span><span class="cl-l en-text hidden">Combustor</span></div><span class="cl-stem"></span><span class="cl-dot"></span></div>
+      <div class="cl cl-b" style="left:64%"><div class="cl-chip"><span class="cl-n">04</span><span class="cl-l ko-text">터빈</span><span class="cl-l en-text hidden">Turbine</span></div><span class="cl-stem"></span><span class="cl-dot"></span></div>
+      <div class="cl cl-t" style="left:85%"><div class="cl-chip"><span class="cl-n">05</span><span class="cl-l ko-text">노즐</span><span class="cl-l en-text hidden">Nozzle</span></div><span class="cl-stem"></span><span class="cl-dot"></span></div>
+    </figure>
+    <ol class="arch">
+      <li class="arch-card"><div class="arch-top"><span class="arch-n">01</span><span class="arch-tag ko-text">유로</span><span class="arch-tag en-text hidden">Flow path</span></div><h4 class="ko-text">흡입 · 유동 안정화</h4><h4 class="en-text hidden">Inlet &amp; Flow Conditioning</h4><p class="ko-text">압축 전 유입 공기를 안정화하고, 전 운용 영역에서 흡입구 왜곡을 저감합니다.</p><p class="en-text hidden">Stabilizes incoming airflow before compression and reduces inlet distortion across the operating envelope.</p></li>
+      <li class="arch-card"><div class="arch-top"><span class="arch-n">02</span><span class="arch-tag ko-text">회전체</span><span class="arch-tag en-text hidden">Rotating</span></div><h4 class="ko-text">압축기 단</h4><h4 class="en-text hidden">Compressor Stage</h4><p class="ko-text">효율, 서지 마진, 제조 가능한 블레이드 형상을 고려한 소형 회전 단으로 공기 압력을 높입니다.</p><p class="en-text hidden">Raises air pressure through a compact rotating stage designed around efficiency, surge margin, and manufacturable blade geometry.</p></li>
+      <li class="arch-card"><div class="arch-top"><span class="arch-n">03</span><span class="arch-tag ko-text">고온부</span><span class="arch-tag en-text hidden">Hot section</span></div><h4 class="ko-text">환형 연소 영역</h4><h4 class="en-text hidden">Annular Combustion Zone</h4><p class="ko-text">안정적 점화, 열 제어, 균일한 고온 가스 공급에 중점을 둔 소형 연소기 구조에서 연료와 압축 공기를 혼합합니다.</p><p class="en-text hidden">Mixes fuel and compressed air inside a compact combustor architecture focused on stable ignition, thermal control, and consistent hot-gas delivery.</p></li>
+      <li class="arch-card"><div class="arch-top"><span class="arch-n">04</span><span class="arch-tag ko-text">회전체</span><span class="arch-tag en-text hidden">Rotating</span></div><h4 class="ko-text">터빈 · 로터부</h4><h4 class="en-text hidden">Turbine / Rotor Section</h4><p class="ko-text">고온 가스에서 에너지를 추출해 압축기를 구동하며, 밸런싱·베어링 제어·소재 내구성이 요구되는 초고속 로터 시스템으로 구현됩니다.</p><p class="en-text hidden">Extracts energy from high-temperature gas to drive the compressor through a high-speed rotor system requiring balance, bearing control, and material durability.</p></li>
+      <li class="arch-card"><div class="arch-top"><span class="arch-n">05</span><span class="arch-tag ko-text">유로</span><span class="arch-tag en-text hidden">Flow path</span></div><h4 class="ko-text">노즐 · 배기 유동</h4><h4 class="en-text hidden">Nozzle &amp; Exhaust Flow</h4><p class="ko-text">배압, 열 부하, UAV 기체 통합을 관리하면서 배기 흐름을 가속하여 유효 추력으로 전환합니다.</p><p class="en-text hidden">Accelerates exhaust flow into usable thrust while managing back pressure, thermal loading, and integration with the UAV airframe.</p></li>
+    </ol>
+
+    <!-- Application -->
+    <div class="subhead">
+      <span class="sn">05</span>
+      <h3 class="ko-text">UAV 추진 통합</h3><h3 class="en-text hidden">UAV Propulsion Integration</h3>
+      <span class="ln"></span>
+    </div>
+    <div class="shots">
+      <figure class="shot"><img src="assets/drone-install.jpg" alt="Micro turbine engine installed inside a UAV airframe" loading="lazy"/><figcaption><span class="ko-text">기체 내부 장착 예시</span><span class="en-text hidden">Installation example</span></figcaption></figure>
+      <figure class="shot"><img src="assets/clarity-uav.jpg" alt="High-speed UAV in flight" loading="lazy"/><figcaption><span class="ko-text">비행 예시</span><span class="en-text hidden">In flight</span></figcaption></figure>
+    </div>
+    <ul class="app-pts" style="margin-top:var(--s4)">
+      <li><span><strong class="ko-text">15–40 kg급 플랫폼.</strong><strong class="en-text hidden">15–40 kg platforms.</strong> <span class="ko-text">소형 가스터빈 추진에 적합한 고속 무인기 클래스.</span><span class="en-text hidden">High-speed UAV class suited to compact turbine propulsion.</span></span></li>
+      <li><span><strong class="ko-text">400–700+ km/h.</strong><strong class="en-text hidden">400–700+ km/h.</strong> <span class="ko-text">기존 전기 추진 대비 큰 폭의 속도 향상을 목표.</span><span class="en-text hidden">Targeting a major speed step over electric propulsion.</span></span></li>
+      <li><span><strong class="ko-text">엔진 + 연료계 통합.</strong><strong class="en-text hidden">Engine + fuel system.</strong> <span class="ko-text">기체 내부 통합을 고려한 추진 패키지 설계.</span><span class="en-text hidden">A propulsion package designed for airframe integration.</span></span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- COMPANY -->
+<section class="sec sec-co" id="company">
+  <div class="wrap">
+    <div class="co-grid">
+      <div class="co-media"><img src="assets/hero-turbine.jpg" alt="Precision turbine component in an aerospace manufacturing facility" loading="lazy"/></div>
+      <div>
+        <div class="kicker" data-ko="회사 소개" data-en="Company">회사 소개</div>
+        <h2 class="sec-title ko-text">터빈을 재발명하지 않습니다.<br/>만드는 방식을 재설계합니다.</h2>
+        <h2 class="sec-title en-text hidden">We don't reinvent turbines.<br/>We redesign how they're built.</h2>
+        <p class="lead ko-text" style="margin-top:var(--s3)">항공기용 터빈 엔진은 고온 환경, 첨단 소재, 초고속 회전체 안정성, 정밀 제조를 요구하는 고난도 기계 시스템입니다. Thrust Dynamics는 고성능 금속 적층제조와 정밀가공, 터빈 엔지니어링을 결합해 그 원리를 고속 UAV에 맞는 소형·제조 중심 시스템으로 구현합니다.</p>
+        <p class="lead en-text hidden" style="margin-top:var(--s3)">Aircraft turbine engines are among the most complex machines ever built. Thrust Dynamics combines advanced metal additive manufacturing, precision machining, and turbine engineering to bring those principles into a compact, manufacturable system for high-speed UAVs.</p>
+        <div class="co-facts">
+          <div class="r"><span class="k ko-text">본사</span><span class="k en-text hidden">Based in</span><span class="v ko-text">대한민국</span><span class="v en-text hidden">Republic of Korea</span></div>
+          <div class="r"><span class="k ko-text">제품</span><span class="k en-text hidden">Product</span><span class="v ko-text">마이크로 가스터빈 엔진</span><span class="v en-text hidden">Micro gas turbine engines</span></div>
+          <div class="r"><span class="k ko-text">현황</span><span class="k en-text hidden">Status</span><span class="v ko-text">설계 → 하드웨어 단계</span><span class="v en-text hidden">Moving from design to hardware</span></div>
+          <div class="r"><span class="k ko-text">공식 출범</span><span class="k en-text hidden">Opening</span><span class="v ko-text">2026년 9월 (예정)</span><span class="v en-text hidden">September 2026 (planned)</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="vision">
+      <p class="ko-text"><strong>비전</strong> — 고속 무인항공 시스템의 추진 레이어가 되어, 속도·비용·확장성이 공존하도록 합니다.</p>
+      <p class="en-text hidden"><strong>Vision</strong> — to become the propulsion layer for high-speed unmanned systems, where speed, cost, and scale coexist.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CAPABILITIES -->
+<section class="sec sec-cap" id="capabilities">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker" data-ko="핵심 역량" data-en="Capabilities">핵심 역량</div>
+      <h2 class="sec-title ko-text">핵심 개발 역량</h2>
+      <h2 class="sec-title en-text hidden">Core Development Capabilities</h2>
+    </div>
+    <div class="caps">
+      <div class="cap"><div class="cap-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/></svg></div><h3 class="cap-t ko-text">마이크로 가스터빈 개발</h3><h3 class="cap-t en-text hidden">Micro Gas Turbine Development</h3><p class="cap-d ko-text">18–40 kgf 클래스 엔진의 통합 설계.</p><p class="cap-d en-text hidden">Integrated design for 18–40 kgf class engines.</p></div>
+      <div class="cap"><div class="cap-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v16" stroke-dasharray="2 2"/><path d="M12 13h6"/></svg></div><h3 class="cap-t ko-text">LPBF 금속 적층 제조</h3><h3 class="cap-t en-text hidden">LPBF Metal Additive Manufacturing</h3><p class="cap-d ko-text">복잡 형상 터빈 부품의 적층 제조.</p><p class="cap-d en-text hidden">Additive manufacturing of complex turbine parts.</p></div>
+      <div class="cap"><div class="cap-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 12l10 5 10-5M2 17l10 5 10-5"/></svg></div><h3 class="cap-t ko-text">CNC 정밀가공</h3><h3 class="cap-t en-text hidden">CNC Precision Machining</h3><p class="cap-d ko-text">블레이드·샤프트·하우징 고정밀 가공.</p><p class="cap-d en-text hidden">High-precision finishing of rotating parts.</p></div>
+      <div class="cap"><div class="cap-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5"/><path d="M12 3v3.5M12 17.5V21M3 12h3.5M17.5 12H21"/></svg></div><h3 class="cap-t ko-text">초고속 회전체 시스템</h3><h3 class="cap-t en-text hidden">High-Speed Rotating Systems</h3><p class="cap-d ko-text">발란싱·베어링 통합과 회전 안정성.</p><p class="cap-d en-text hidden">Balancing, bearings, and rotational stability.</p></div>
+      <div class="cap"><div class="cap-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V6a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v2"/><path d="M12 12v4M10 14h4"/></svg></div><h3 class="cap-t ko-text">엔진 시험 인프라</h3><h3 class="cap-t en-text hidden">Engine Test Infrastructure</h3><p class="cap-d ko-text">압축기·연소·엔진 성능 시험.</p><p class="cap-d en-text hidden">Compressor, combustion, and engine testing.</p></div>
+      <div class="cap"><div class="cap-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12l9-2 11-6-6 11-2 9-2.5-6.5L2 12z"/></svg></div><h3 class="cap-t ko-text">UAV 추진 통합</h3><h3 class="cap-t en-text hidden">UAV Propulsion Integration</h3><p class="cap-d ko-text">15–40 kg급 플랫폼 통합 설계.</p><p class="cap-d en-text hidden">Integration design for 15–40 kg platforms.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- MANUFACTURING -->
+<section class="sec sec-mfg" id="manufacturing">
+  <div class="wrap">
+    <div class="mfg">
+      <div>
+        <div class="kicker" data-ko="제조 접근 방식" data-en="Manufacturing">제조 접근 방식</div>
+        <h2 class="sec-title ko-text">제조 중심<br/>터빈 개발</h2>
+        <h2 class="sec-title en-text hidden">Manufacturing-led<br/>turbine development</h2>
+        <p class="lead ko-text" style="margin-top:var(--s3)">터빈 내부의 복잡 형상 부품은 일반적으로 높은 비용과 긴 리드타임을 요구합니다. Thrust Dynamics는 고성능 산업용 금속 3D 프린터를 중심으로 LPBF와 CNC를 통합해 이를 제조 가능하게 만들고, 설계–제조–시험 주기를 단축합니다.</p>
+        <p class="lead en-text hidden" style="margin-top:var(--s3)">The complex parts inside a turbine normally demand high cost and long lead times. Built around a high-end industrial metal 3D printer, we integrate LPBF with CNC machining to make them manufacturable — and to shorten the design–build–test cycle.</p>
+        <ul class="mpts">
+          <li><strong class="ko-text">고성능 산업용 금속 3D 프린팅</strong><strong class="en-text hidden">High-end metal 3D printing</strong><span class="ko-text">복잡한 터빈 부품을 산업용 LPBF로 제조.</span><span class="en-text hidden">Complex turbine parts on industrial LPBF.</span></li>
+          <li><strong class="ko-text">LPBF + CNC 통합</strong><strong class="en-text hidden">LPBF + CNC integration</strong><span class="ko-text">적층 제조와 정밀가공을 하나의 흐름으로.</span><span class="en-text hidden">Additive and precision machining in one flow.</span></li>
+          <li><strong class="ko-text">빠른 반복 · IP 내재화</strong><strong class="en-text hidden">Fast iteration · in-house IP</strong><span class="ko-text">핵심 제조를 내부에서 수행.</span><span class="en-text hidden">Core manufacturing kept in-house.</span></li>
+          <li><strong class="ko-text">생산 중심 · 품질 준비</strong><strong class="en-text hidden">Production-oriented · quality-ready</strong><span class="ko-text">AS9100 / ISO 9001 품질 체계 준비 중 (인증 미완료).</span><span class="en-text hidden">AS9100 / ISO 9001 systems in preparation (not yet certified).</span></li>
+        </ul>
+      </div>
+      <div class="mfg-media">
+        <img src="assets/lpbf-process.jpg" alt="LPBF metal additive manufacturing of a turbine component" loading="lazy"/>
+        <div class="mfg-tag ko-text">LPBF 적층 제조 공정</div>
+        <div class="mfg-tag en-text hidden">LPBF additive process</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="sec sec-ct" id="contact">
+  <div class="wrap">
+    <div class="ct">
+      <div>
+        <div class="kicker" data-ko="문의" data-en="Contact">문의</div>
+        <h2 class="sec-title ko-text">Thrust Dynamics<br/>팀에 문의해 주십시오.</h2>
+        <h2 class="sec-title en-text hidden">Contact the<br/>Thrust Dynamics team.</h2>
+        <p class="lead ko-text" style="margin-top:var(--s3)">2026년 9월 공식 출범 예정입니다. 파트너십, 투자, UAV 통합, 제조 협력, 정부·방산 관련 논의 및 기술 문의를 환영합니다.</p>
+        <p class="lead en-text hidden" style="margin-top:var(--s3)">Opening planned for September 2026. We welcome inquiries on partnership, investment, UAV integration, manufacturing, government/defense discussions, and technical topics.</p>
+        <div class="ct-meta ko-text"><span>대한민국 · 항공우주 하드웨어</span><span class="d">·</span><span>공식 출범 2026년 9월</span></div>
+        <div class="ct-meta en-text hidden"><span>Republic of Korea · aerospace hardware</span><span class="d">·</span><span>Opening September 2026</span></div>
+        <a class="ct-email" href="mailto:contact@thrustdynamics.com" aria-label="Email Thrust Dynamics">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+          contact@thrustdynamics.com
+        </a>
+      </div>
+      <form class="form" id="form" novalidate>
+        <div class="frow">
+          <div class="fg"><label for="f-name"><span class="ko-text">이름</span><span class="en-text hidden">Name</span> <span class="req">*</span></label><input id="f-name" type="text" autocomplete="name" required data-ph-ko="성함" data-ph-en="Your name" placeholder="성함"/><span class="ferr" role="alert"></span></div>
+          <div class="fg"><label for="f-org"><span class="ko-text">회사 또는 기관</span><span class="en-text hidden">Company or Organization</span> <span class="req">*</span></label><input id="f-org" type="text" autocomplete="organization" required data-ph-ko="소속 기관" data-ph-en="Your organization" placeholder="소속 기관"/><span class="ferr" role="alert"></span></div>
+        </div>
+        <div class="fg"><label for="f-email"><span class="ko-text">이메일</span><span class="en-text hidden">Email</span> <span class="req">*</span></label><input id="f-email" type="email" autocomplete="email" required data-ph-ko="이메일 주소" data-ph-en="your@email.com" placeholder="이메일 주소"/><span class="ferr" role="alert"></span></div>
+        <div class="fg"><label for="f-type"><span class="ko-text">문의 유형</span><span class="en-text hidden">Inquiry Type</span> <span class="req">*</span></label>
+          <select id="f-type" required>
+            <option value="" disabled selected>—</option>
+            <option value="investment" data-ko="투자" data-en="Investment">투자</option>
+            <option value="partnership" data-ko="파트너십" data-en="Partnership">파트너십</option>
+            <option value="uav" data-ko="UAV 통합" data-en="UAV Integration">UAV 통합</option>
+            <option value="manufacturing" data-ko="제조 협력" data-en="Manufacturing">제조 협력</option>
+            <option value="govdef" data-ko="정부·방산" data-en="Government / Defense">정부·방산</option>
+            <option value="technical" data-ko="기술 논의" data-en="Technical Discussion">기술 논의</option>
+            <option value="general" data-ko="일반 문의" data-en="General Inquiry">일반 문의</option>
+          </select><span class="ferr" role="alert"></span></div>
+        <div class="fg"><label for="f-msg"><span class="ko-text">메시지</span><span class="en-text hidden">Message</span> <span class="req">*</span></label><textarea id="f-msg" rows="5" required data-ph-ko="문의 내용을 입력해 주세요." data-ph-en="Please describe your inquiry." placeholder="문의 내용을 입력해 주세요."></textarea><span class="ferr" role="alert"></span></div>
+        <div class="hp" aria-hidden="true"><label>Leave this field empty<input type="text" id="f-hp" name="website" tabindex="-1" autocomplete="off" /></label></div>
+        <p class="fconsent ko-text">전송 시 문의 처리를 위해 입력하신 정보가 사용되는 것에 동의하게 됩니다.</p>
+        <p class="fconsent en-text hidden">By sending, you agree that your information may be used to respond to your inquiry.</p>
+        <button type="submit" class="btn btn-primary btn-lg fsubmit" id="submit">
+          <span class="blab ko-text">메시지 전송</span><span class="blab en-text hidden">Send Message</span>
+          <span class="floading" hidden><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/></svg></span>
+        </button>
+        <div class="fsuccess" id="success" hidden role="alert">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <span class="ko-text">메시지가 전송되었습니다. 곧 연락드리겠습니다.</span><span class="en-text hidden">Message sent. We will be in touch shortly.</span>
+        </div>
+        <div class="ferror-note" id="form-error" role="alert">
+          <span class="ko-text">전송에 실패했습니다. 잠시 후 다시 시도하시거나 </span><span class="en-text hidden">Could not send. Please try again, or email </span><a href="mailto:contact@thrustdynamics.com">contact@thrustdynamics.com</a><span class="ko-text"> 으로 직접 연락 주십시오.</span><span class="en-text hidden"> directly.</span>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="ftr">
+  <div class="wrap ftr-in">
+    <div class="ftr-top">
+      <div>
+        <a href="#hero" class="logo" aria-label="Thrust Dynamics">
+          <svg class="logo-mark" width="30" height="30" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <circle cx="16" cy="16" r="13.2" stroke="currentColor" stroke-width="1.4"/>
+            <g stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M16 13.6 C 14.9 10.6, 14.9 8.2, 16.6 5.2"/><path d="M16 13.6 C 14.9 10.6, 14.9 8.2, 16.6 5.2" transform="rotate(72 16 16)"/><path d="M16 13.6 C 14.9 10.6, 14.9 8.2, 16.6 5.2" transform="rotate(144 16 16)"/><path d="M16 13.6 C 14.9 10.6, 14.9 8.2, 16.6 5.2" transform="rotate(216 16 16)"/><path d="M16 13.6 C 14.9 10.6, 14.9 8.2, 16.6 5.2" transform="rotate(288 16 16)"/></g>
+            <circle cx="16" cy="16" r="2.3" fill="currentColor"/>
+          </svg>
+          <span class="logo-type"><span class="logo-t">THRUST&nbsp;DYNAMICS</span><span class="logo-d">AEROSPACE&nbsp;PROPULSION</span></span>
+        </a>
+        <p class="ftr-tag ko-text">고속 무인항공 플랫폼을 위한 소형 터빈 추진 시스템.</p>
+        <p class="ftr-tag en-text hidden">Compact turbine propulsion for high-speed unmanned flight.</p>
+      </div>
+      <nav class="ftr-links" aria-label="Footer">
+        <a href="#system" data-ko="시스템" data-en="System">시스템</a>
+        <a href="#company" data-ko="회사" data-en="Company">회사</a>
+        <a href="#capabilities" data-ko="역량" data-en="Capabilities">역량</a>
+        <a href="#manufacturing" data-ko="제조" data-en="Manufacturing">제조</a>
+        <a href="#contact" data-ko="문의" data-en="Contact">문의</a>
+      </nav>
+    </div>
+    <div class="ftr-bot">
+      <span>© 2026 Thrust Dynamics</span>
+      <span class="disc ko-text">본 웹사이트의 정보는 사전 예고 없이 변경될 수 있으며, 확정된 계약·인증·비행 시험·엔진 시험·고객·정부 승인·생산 납품을 의미하지 않습니다. Thrust Dynamics는 개발 단계 기업이며 2026년 9월 공식 출범을 준비하고 있습니다.</span>
+      <span class="disc en-text hidden">Information on this website is subject to change and does not imply confirmed contracts, certifications, flight or engine tests, customers, government approvals, or production deliveries. Thrust Dynamics is a development-stage company preparing for its public launch in September 2026.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+var T={ko:0,en:1};
+var META={ko:{t:"Thrust Dynamics | 고속 UAV용 마이크로 가스터빈 추진 시스템",d:"Thrust Dynamics는 고속 무인항공 플랫폼을 위한 제조 중심 마이크로터빈 엔진을 개발하는 한국 기반 항공우주 하드웨어 기업입니다.",ph:"문의 유형을 선택해 주세요"},en:{t:"Thrust Dynamics | Micro Gas Turbine Propulsion for High-Speed UAVs",d:"Thrust Dynamics is developing compact micro gas turbine propulsion systems for high-speed UAV platforms.",ph:"Select inquiry type"}};
+// ── Contact delivery ─────────────────────────────────────────────
+// To enable real submissions, create a free form at https://formspree.io
+// and paste its endpoint below (e.g. "https://formspree.io/f/abcdwxyz").
+// While empty, the form opens the visitor's email client to CONTACT_EMAIL.
+var CONTACT_ENDPOINT="";
+var CONTACT_EMAIL="contact@thrustdynamics.com";
+var lang="ko";
+function setLang(l){lang=l;document.documentElement.lang=l;
+  document.querySelectorAll(".ko-text").forEach(function(e){e.classList.toggle("hidden",l!=="ko");});
+  document.querySelectorAll(".en-text").forEach(function(e){e.classList.toggle("hidden",l!=="en");});
+  document.querySelectorAll("#lang .o").forEach(function(o){o.classList.toggle("active",o.dataset.lang===l);});
+  document.querySelectorAll("[data-ko][data-en]").forEach(function(e){if(!e.querySelector(".ko-text,.en-text"))e.textContent=(l==="ko"?e.dataset.ko:e.dataset.en);});
+  document.querySelectorAll("[data-ph-ko]").forEach(function(e){e.placeholder=(l==="ko"?e.dataset.phKo:e.dataset.phEn);});
+  document.querySelectorAll("select option[data-ko]").forEach(function(o){o.textContent=(l==="ko"?o.dataset.ko:o.dataset.en);});
+  var ts=document.getElementById("f-type");if(ts){var ph=ts.querySelector('option[value=""]');if(ph)ph.textContent=META[l].ph;}
+  var set=function(id,p,v){var e=document.getElementById(id);if(e)e[p]=v;};
+  set("page-title","textContent",META[l].t);set("page-desc","content",META[l].d);set("og-title","content",META[l].t);set("og-desc","content",META[l].d);
+  try{localStorage.setItem("td-lang",l);}catch(e){}
+}
+
+document.addEventListener("DOMContentLoaded",function(){
+  // language
+  var lt=document.getElementById("lang");
+  lt.addEventListener("click",function(e){var o=e.target.closest(".o");setLang(o?o.dataset.lang:(lang==="ko"?"en":"ko"));});
+  var s="ko";try{s=localStorage.getItem("td-lang")||"ko";}catch(e){}setLang(s==="en"?"en":"ko");
+  // header scrolled
+  var hdr=document.getElementById("hdr");
+  function sc(){hdr.classList.toggle("scrolled",window.scrollY>window.innerHeight*0.6);}window.addEventListener("scroll",sc,{passive:true});sc();
+  // mobile menu
+  var bg=document.getElementById("burger"),mn=document.getElementById("mnav");
+  bg.addEventListener("click",function(){var o=bg.getAttribute("aria-expanded")==="true";bg.setAttribute("aria-expanded",String(!o));mn.classList.toggle("open",!o);mn.setAttribute("aria-hidden",String(o));});
+  mn.querySelectorAll("a").forEach(function(a){a.addEventListener("click",function(){bg.setAttribute("aria-expanded","false");mn.classList.remove("open");});});
+  // smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener("click",function(e){var id=a.getAttribute("href").slice(1);if(!id)return;var t=document.getElementById(id);if(!t)return;e.preventDefault();var hh=parseInt(getComputedStyle(document.documentElement).getPropertyValue("--hh"))||76;window.scrollTo({top:t.getBoundingClientRect().top+window.scrollY-hh+1,behavior:"smooth"});});});
+  // autoplay videos: respect reduced-motion, otherwise ensure playback
+  var rmv=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  document.querySelectorAll("video[autoplay]").forEach(function(v){if(rmv){v.removeAttribute("autoplay");try{v.pause();}catch(e){}}else{var p=v.play();if(p&&p.catch)p.catch(function(){});}});
+  // hero background film: single master video, responsive source (lighter on mobile / slow links)
+  (function(){
+    var v=document.getElementById("hero-video");
+    if(!v)return;
+    if(rmv)return; // reduced motion: keep the poster still, don't load the film
+    var c=navigator.connection||{};
+    var light=window.matchMedia("(max-width:760px)").matches||c.saveData===true||/(^|\s)(slow-2g|2g|3g)(\s|$)/.test(c.effectiveType||"");
+    v.src=light?"assets/video/hero-master-720.mp4":"assets/video/hero-master.mp4";
+    try{v.load();}catch(e){}
+    var p=v.play();if(p&&p.catch)p.catch(function(){});
+  })();
+  // reveal
+  if("IntersectionObserver" in window){
+    var rv=document.querySelectorAll(".mcard,.engine,.cut,.cap,.vision,.co-facts,.mpts li,.sec-head");
+    rv.forEach(function(el,i){el.classList.add("reveal");el.style.transitionDelay=(i%4*60)+"ms";});
+    var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add("in");io.unobserve(en.target);}});},{threshold:.12,rootMargin:"0px 0px -40px 0px"});
+    rv.forEach(function(el){io.observe(el);});
+    // active nav
+    var links=Array.prototype.slice.call(document.querySelectorAll(".nav a"));
+    var na=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting)links.forEach(function(a){var m=a.getAttribute("href")==="#"+en.target.id;a.classList.toggle("active",m);if(m){a.setAttribute("aria-current","true");}else{a.removeAttribute("aria-current");}});});},{threshold:0,rootMargin:"-50% 0px -45% 0px"});
+    links.forEach(function(a){var el=document.getElementById(a.getAttribute("href").slice(1));if(el)na.observe(el);});
+  }
+  // contact form
+  var form=document.getElementById("form"),sb=document.getElementById("submit"),ok=document.getElementById("success");
+  var fields=["f-name","f-org","f-email","f-type","f-msg"];
+  function vf(id){var el=document.getElementById(id);if(!el)return true;var er=el.closest(".fg").querySelector(".ferr");var m="";
+    if(el.required&&!el.value.trim())m=(lang==="ko"?"필수 입력 항목입니다.":"This field is required.");
+    else if(id==="f-email"&&el.value&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value))m=(lang==="ko"?"올바른 이메일 주소를 입력해 주세요.":"Please enter a valid email address.");
+    el.classList.toggle("invalid",!!m);if(er)er.textContent=m;return !m;}
+  fields.forEach(function(id){var el=document.getElementById(id);if(el)el.addEventListener("blur",function(){vf(id);});});
+  function fval(id){var el=document.getElementById(id);return el?(el.value||"").trim():"";}
+  function floading(on){sb.querySelectorAll(".blab").forEach(function(x){if(on)x.setAttribute("hidden","");else x.removeAttribute("hidden");});var l=sb.querySelector(".floading");if(l){if(on)l.removeAttribute("hidden");else l.setAttribute("hidden","");}sb.disabled=on;}
+  function fdone(){form.style.display="none";ok.removeAttribute("hidden");ok.scrollIntoView({behavior:"smooth",block:"center"});}
+  function ffail(){floading(false);var er=document.getElementById("form-error");if(er)er.classList.add("show");}
+  form.addEventListener("submit",function(e){e.preventDefault();
+    var hp=document.getElementById("f-hp");if(hp&&hp.value){fdone();return;} // honeypot: silently accept bots
+    var er=document.getElementById("form-error");if(er)er.classList.remove("show");
+    var allValid=true;fields.forEach(function(id){if(!vf(id))allValid=false;});
+    if(!allValid){var f=fields.find(function(id){return document.getElementById(id).classList.contains("invalid");});if(f)document.getElementById(f).focus();return;}
+    var ts=document.getElementById("f-type");var typeTxt=ts?(ts.options[ts.selectedIndex].textContent||fval("f-type")):fval("f-type");
+    var data={name:fval("f-name"),organization:fval("f-org"),email:fval("f-email"),inquiryType:typeTxt,message:fval("f-msg"),_subject:"[Thrust Dynamics] "+typeTxt+" — "+fval("f-org")};
+    floading(true);
+    if(CONTACT_ENDPOINT){
+      fetch(CONTACT_ENDPOINT,{method:"POST",headers:{"Accept":"application/json","Content-Type":"application/json"},body:JSON.stringify(data)})
+        .then(function(r){if(!r.ok)throw new Error("send failed");fdone();})
+        .catch(function(){ffail();});
+    }else{
+      var lines="Name: "+data.name+"\nOrganization: "+data.organization+"\nEmail: "+data.email+"\nInquiry: "+data.inquiryType+"\n\n"+data.message;
+      window.location.href="mailto:"+CONTACT_EMAIL+"?subject="+encodeURIComponent(data._subject)+"&body="+encodeURIComponent(lines);
+      setTimeout(fdone,600);
+    }
+  });
+});
+</script>
+</body>
+</html>
