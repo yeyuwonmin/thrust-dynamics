@@ -235,7 +235,22 @@ html[lang="ko"] .cl-l{font-family:var(--fk)}
 .cl-stem{width:1.5px;height:30px;background:linear-gradient(to bottom,rgba(255,255,255,.85),rgba(255,255,255,.12))}
 .cl-b .cl-stem{background:linear-gradient(to top,rgba(255,255,255,.85),rgba(255,255,255,.12))}
 .cl-dot{width:7px;height:7px;border-radius:50%;background:#fff;box-shadow:0 0 0 4px rgba(120,180,240,.25)}
-@media (max-width:760px){.cl{display:none}}
+.cl1{left:8%}.cl2{left:26%}.cl3{left:50%}.cl4{left:64%}.cl5{left:85%}
+/* Mobile: keep the numbered callouts ON the image, but compact — hide leader
+   stems, shrink chips, and use edge-safe positions so 01/05 don't clip. */
+@media (max-width:760px){
+  .cl-stem,.cl-dot{display:none}
+  .cl-chip{padding:3px 8px;gap:5px;border-radius:8px;background:rgba(10,17,28,.74)}
+  .cl-n{font-size:9px}
+  .cl-l{font-size:9.5px;letter-spacing:.01em}
+  .cl-t{top:5%}.cl-b{bottom:5%}
+  .cl1{left:13%}.cl2{left:32%}.cl3{left:50%}.cl4{left:68%}.cl5{left:86%}
+}
+@media (max-width:380px){
+  .cl-chip{padding:2px 6px;gap:4px}
+  .cl-n,.cl-l{font-size:8.5px}
+  .cl1{left:12%}.cl5{left:87%}
+}
 .arch-intro{max-width:74ch;margin-top:var(--s3);font-size:15px;line-height:1.7;color:var(--ink-soft)}
 .arch{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--s2);margin-top:var(--s4)}
 .arch-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--rad-md);padding:var(--s3);display:flex;flex-direction:column;gap:9px;transition:border-color .2s,box-shadow .2s,transform .2s}
@@ -527,11 +542,11 @@ html[lang="ko"] .ftr-links a{font-family:var(--fk)}
         <source src="assets/video/turbine-cinematic-loop.mp4" type="video/mp4"/>
       </video>
       <div class="archvid-scrim" aria-hidden="true"></div>
-      <div class="cl cl-t" style="left:8%"><div class="cl-chip"><span class="cl-n">01</span><span class="cl-l ko-text">흡입</span><span class="cl-l en-text hidden">Inlet</span></div><span class="cl-stem"></span><span class="cl-dot"></span></div>
-      <div class="cl cl-b" style="left:26%"><div class="cl-chip"><span class="cl-n">02</span><span class="cl-l ko-text">압축기</span><span class="cl-l en-text hidden">Compressor</span></div><span class="cl-stem"></span><span class="cl-dot"></span></div>
-      <div class="cl cl-t" style="left:50%"><div class="cl-chip"><span class="cl-n">03</span><span class="cl-l ko-text">연소</span><span class="cl-l en-text hidden">Combustor</span></div><span class="cl-stem"></span><span class="cl-dot"></span></div>
-      <div class="cl cl-b" style="left:64%"><div class="cl-chip"><span class="cl-n">04</span><span class="cl-l ko-text">터빈</span><span class="cl-l en-text hidden">Turbine</span></div><span class="cl-stem"></span><span class="cl-dot"></span></div>
-      <div class="cl cl-t" style="left:85%"><div class="cl-chip"><span class="cl-n">05</span><span class="cl-l ko-text">노즐</span><span class="cl-l en-text hidden">Nozzle</span></div><span class="cl-stem"></span><span class="cl-dot"></span></div>
+      <div class="cl cl-t cl1"><div class="cl-chip"><span class="cl-n">01</span><span class="cl-l ko-text">흡입</span><span class="cl-l en-text hidden">Inlet</span></div><span class="cl-stem"></span><span class="cl-dot"></span></div>
+      <div class="cl cl-b cl2"><div class="cl-chip"><span class="cl-n">02</span><span class="cl-l ko-text">압축기</span><span class="cl-l en-text hidden">Compressor</span></div><span class="cl-stem"></span><span class="cl-dot"></span></div>
+      <div class="cl cl-t cl3"><div class="cl-chip"><span class="cl-n">03</span><span class="cl-l ko-text">연소</span><span class="cl-l en-text hidden">Combustor</span></div><span class="cl-stem"></span><span class="cl-dot"></span></div>
+      <div class="cl cl-b cl4"><div class="cl-chip"><span class="cl-n">04</span><span class="cl-l ko-text">터빈</span><span class="cl-l en-text hidden">Turbine</span></div><span class="cl-stem"></span><span class="cl-dot"></span></div>
+      <div class="cl cl-t cl5"><div class="cl-chip"><span class="cl-n">05</span><span class="cl-l ko-text">노즐</span><span class="cl-l en-text hidden">Nozzle</span></div><span class="cl-stem"></span><span class="cl-dot"></span></div>
     </figure>
     <ol class="arch">
       <li class="arch-card"><div class="arch-top"><span class="arch-n">01</span><span class="arch-tag ko-text">유로</span><span class="arch-tag en-text hidden">Flow path</span></div><h4 class="ko-text">흡입 · 유동 안정화</h4><h4 class="en-text hidden">Inlet &amp; Flow Conditioning</h4><p class="ko-text">압축 전 유입 공기를 안정화하고, 전 운용 영역에서 흡입구 왜곡을 저감합니다.</p><p class="en-text hidden">Stabilizes incoming airflow before compression and reduces inlet distortion across the operating envelope.</p></li>
